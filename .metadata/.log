@@ -2921,3 +2921,6 @@ Caused by: org.eclipse.core.commands.NotHandledException: There is no handler to
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2013-05-22 15:08:29.055
 !MESSAGE Current file is not a match for the given config.
+
+!ENTRY org.eclipse.ui 4 4 2013-05-22 15:32:41.229
+!MESSAGE Referenced part does not exist yet: org.eclipse.ui.views.ProblemView.
