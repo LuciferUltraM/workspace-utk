@@ -21,7 +21,7 @@ public class DisplayMessageActivity extends Activity {
 		String message = intent.getStringExtra(EXTRA_MESSAGE);
 		textMessage.setText(message);
 		textMessage.setTextSize(40);
-		textMessage.setTextColor(Color.RED);
+//		textMessage.setTextColor(Color.RED);
 		
 	}
 
