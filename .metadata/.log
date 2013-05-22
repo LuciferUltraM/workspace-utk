@@ -955,3 +955,6 @@ Java Model Exception: Java Model Status [Timed out while retrieving the attached
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 !SUBENTRY 1 org.eclipse.jdt.core 4 1012 2013-05-22 13:18:57.751
 !MESSAGE Timed out while retrieving the attached javadoc for ManagedClientConnection [in ManagedClientConnection.class [in org.apache.http.conn [in /Users/nattapong/adt-bundle-mac-x86_64-20130514/sdk/platforms/android-17/android.jar]]] 
+
+!ENTRY com.android.ide.eclipse.adt 4 0 2013-05-22 13:30:52.949
+!MESSAGE Failed to load properties file for project 'ToDoList'
