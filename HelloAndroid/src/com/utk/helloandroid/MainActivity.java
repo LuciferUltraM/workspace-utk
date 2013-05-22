@@ -1,6 +1,7 @@
 package com.utk.helloandroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +24,11 @@ public class MainActivity extends Activity {
     	
     	textMessage.setText(editMsg);
     	Toast.makeText(this, editMsg, Toast.LENGTH_LONG).show();
+    	
+    	Intent intent = new Intent(MainActivity.this, DisplayMessageActivity.class);
+    	intent.putExtra(DisplayMessageActivity.EXTRA_MESSAGE, editMsg);
+    	startActivity(intent);
+    	
     }
 
 
