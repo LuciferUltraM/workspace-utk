@@ -53,8 +53,8 @@ public class MainActivity extends Activity {
 						String date = jItem.getString("date");
 						String maxC = jItem.getString("tempMaxC");
 						String minC = jItem.getString("tempMinC");
-						String weatherDesc = jItem.getJSONArray("weatherDesc").getJSONObject(0).getString("value");
-						String weatherMsg = String.format("%s: %s - Max %s, Min %s", date, weatherDesc, maxC, minC);
+						
+						String weatherMsg = String.format("%s: Max %s, Min %s", date, maxC, minC);
 						items.add(weatherMsg);
 					}
 					
