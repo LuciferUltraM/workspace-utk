@@ -3,6 +3,7 @@ package com.utk.todolist;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -16,33 +17,43 @@ public class MainActivity extends Activity {
 
 	private EditText editTodo;
 	private ListView listView;
-	
+	private ToDoDBAdapter toDoDBAdapter;
+	private Cursor toDoListCursor;
+
 	private ArrayList<String> todoItems = new ArrayList<String>();
 	private ArrayAdapter<String> aa;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		editTodo = (EditText) findViewById(R.id.editTodo);
 		listView = (ListView) findViewById(R.id.listView);
-		aa = new ArrayAdapter<String>(this, 
+		aa = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, todoItems);
-		
-//		todoItems.add("Test 1");
-//		todoItems.add("Test 2");
+
+		toDoDBAdapter = new ToDoDBAdapter(this);
+		toDoDBAdapter.open();
+		polulateToDoList();
+
 		listView.setAdapter(aa);
-		
+
 		editTodo.setOnKeyListener(new OnKeyListener() {
-			
+
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if ((keyCode == KeyEvent.KEYCODE_ENTER)
 						&& (event.getAction() == KeyEvent.ACTION_DOWN)
 						&& !editTodo.getText().toString().equals("")) {
 					String toDo = editTodo.getText().toString();
-//					todoItems.add(toDo);
-					todoItems.add(0, toDo);
+					// todoItems.add(toDo);
+//					todoItems.add(0, toDo);
+					
+					toDoDBAdapter.insertTask(toDo);
+					
+					updateArray();
+					
 					editTodo.setText("");
 					aa.notifyDataSetChanged();
 					return true;
@@ -50,7 +61,39 @@ public class MainActivity extends Activity {
 				return false;
 			}
 		});
+
+	}
+
+	private void polulateToDoList() {
+		// get all data from the database
+		toDoListCursor = toDoDBAdapter.getAllToDoItems();
+		startManagingCursor(toDoListCursor);
+		// update the array list
+		updateArray();
+	}
+
+	private void updateArray() {
+		toDoListCursor.requery();
+		// clear items in the array list
+		todoItems.clear();
 		
+		if(toDoListCursor.moveToFirst()) {
+			do {
+				String task = toDoListCursor.getString(
+						toDoListCursor.getColumnIndex(ToDoDBAdapter.KEY_TASK)
+						);
+				todoItems.add(0, task);
+			} while (toDoListCursor.moveToNext());
+		}
+		
+		aa.notifyDataSetChanged();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// close the database connection
+		 toDoDBAdapter.close();
 	}
 
 	@Override

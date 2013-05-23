@@ -1,6 +1,9 @@
 package com.utk.todolist;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -24,7 +27,34 @@ public class ToDoDBAdapter {
 				DATABASE_VERSION);
 	}
 	
+	public void open() {
+		try {
+			db = dbHelper.getWritableDatabase();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			db = dbHelper.getReadableDatabase();
+		}
+	}
 	
+	public void close() {
+		// close connection to the database
+		db.close();
+	}
+	
+	public long insertTask(String task) {
+		// create a new row to insert
+		ContentValues newTaskValues = new ContentValues();
+		// add values for each row
+		newTaskValues.put(KEY_TASK, task);
+		// insert into database
+		return db.insert(TABLE_NAME, null, newTaskValues);
+	}
+	
+	public Cursor getAllToDoItems() {
+		// selct all todoitems from the databse
+		return db.query(TABLE_NAME, new String[] { KEY_ID, KEY_TASK }, null,
+				null, null, null, null);
+	}
 	
 
 	private static class ToDoDBOpenHelper extends SQLiteOpenHelper {
