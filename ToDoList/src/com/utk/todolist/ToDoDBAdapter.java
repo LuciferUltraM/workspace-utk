@@ -12,7 +12,7 @@ public class ToDoDBAdapter {
 	private static final String DATABASE_NAME = "ToDoList.db";
 	public static final String TABLE_NAME = "ToDoItems";
 	private static final int DATABASE_VERSION = 1;
-	private static final String KEY_ID = "id";
+	public static final String KEY_ID = "id";
 	public static final String KEY_TASK = "task";
 
 	private SQLiteDatabase db;
@@ -48,6 +48,10 @@ public class ToDoDBAdapter {
 		newTaskValues.put(KEY_TASK, task);
 		// insert into database
 		return db.insert(TABLE_NAME, null, newTaskValues);
+	}
+	
+	public boolean deteleByID(int id) {
+		return db.delete(TABLE_NAME, KEY_ID + "=" + String.valueOf(id), null) > 0;
 	}
 	
 	public Cursor getAllToDoItems() {
