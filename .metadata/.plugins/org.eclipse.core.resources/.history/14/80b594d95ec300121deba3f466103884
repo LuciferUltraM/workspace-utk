@@ -1,0 +1,8 @@
+package com.utk.todolist;
+
+public class ToDoDBAdapter {
+	private static final String DATABASE_NAME = "ToDoList.db";
+	public static final String TABLE_NAME = "ToDoItems";
+	private static final String DATABASE_VERSION = 1;
+	
+}
