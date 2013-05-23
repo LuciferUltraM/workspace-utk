@@ -56,8 +56,8 @@ public class MainActivity extends Activity {
 						String weatherDesc = jItem.getJSONArray("weatherDesc")
 								.getJSONObject(0).getString("value");
 						String weatherMsg = String.format(
-								"%s: %s - Max %s, Min %s", 
-								date, weatherDesc, maxC, minC);
+								"%s: %s - Max %s, Min %s", date, weatherDesc,
+								maxC, minC);
 						items.add(weatherMsg);
 					}
 					

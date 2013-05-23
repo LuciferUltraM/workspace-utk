@@ -49,15 +49,12 @@ public class MainActivity extends Activity {
 					JSONArray jWeather = jData.getJSONArray("weather");
 					for (int i = 0; i < jWeather.length(); i++) {
 						JSONObject jItem = jWeather.getJSONObject(i);
-
+						
 						String date = jItem.getString("date");
 						String maxC = jItem.getString("tempMaxC");
 						String minC = jItem.getString("tempMinC");
-						String weatherDesc = jItem.getJSONArray("weatherDesc")
-								.getJSONObject(0).getString("value");
-						String weatherMsg = String.format(
-								"%s: %s - Max %s, Min %s", 
-								date, weatherDesc, maxC, minC);
+						String weatherDesc = jItem.getJSONArray("weatherDesc").getJSONObject(0).getString("value");
+						String weatherMsg = String.format("%s: %s - Max %s, Min %s", date, weatherDesc, maxC, minC);
 						items.add(weatherMsg);
 					}
 					
