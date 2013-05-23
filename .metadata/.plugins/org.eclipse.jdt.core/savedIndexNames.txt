@@ -2,8 +2,6 @@ INDEX VERSION 1.126+/Users/nattapong/Documents/workspace-utk/.metadata/.plugins/
 1573304368.index
 3738409781.index
 1523145464.index
-3440092888.index
 3025579899.index
 2388620737.index
-3037703340.index
 3939513059.index
