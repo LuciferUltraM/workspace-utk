@@ -9,37 +9,69 @@ import org.json.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import android.R.anim;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
 	private ListView listView;
+	private EditText textSearch;
 
 	private AsyncHttpClient client = new AsyncHttpClient();
 
 	private ArrayList<String> items = new ArrayList<String>();
 	private ArrayAdapter<String> aa;
 
+	public static final String MY_PREFERENCE = "com.utk.HelloWeather";
+	private SharedPreferences mySharedPreference;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		mySharedPreference = getSharedPreferences(MY_PREFERENCE, Activity.MODE_PRIVATE);
+		
 		listView = (ListView) findViewById(R.id.listView);
+		textSearch = (EditText) findViewById(R.id.text_search);
 
 		aa = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, items);
 		listView.setAdapter(aa);
 
-		showWeather();
+		textSearch.setOnKeyListener(new OnKeyListener() {
+			
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if((keyCode == KeyEvent.KEYCODE_ENTER)
+						&& (event.getAction() == KeyEvent.ACTION_DOWN)
+						&& textSearch.getText().length() > 0) {
+					showWeather(textSearch.getText().toString());
+				}
+				
+				return false;
+			}
+		});
+		
+		String city = mySharedPreference.getString("city", "bangkok");
+		showWeather(city);
+		textSearch.setText(city);
 	}
 
-	private void showWeather() {
-		String url = "http://www.makathon.com/weather/?weather=bangkok";
+	private void showWeather(String city) {
+		SharedPreferences.Editor editor = mySharedPreference.edit();
+		editor.putString("city", city);
+		editor.commit();
+		
+		items.clear();
+		String url = "http://www.makathon.com/weather/?weather=" + city;
 		client.get(url, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
