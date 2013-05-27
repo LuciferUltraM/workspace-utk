@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <ImageView android:id="@+id/image_thumbnail"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_launcher"/>
+    <TextView android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/image_thumbnail"
+        android:text="date"/>
+    <TextView android:id="@+id/text_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/image_thumbnail"
+        android:layout_below="@+id/text_date"
+        android:text="description"/>
+    <TextView android:id="@+id/text_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/image_thumbnail"
+        android:layout_below="@+id/text_description"
+        android:text="max"/>
+    <TextView android:id="@+id/text_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/image_thumbnail"
+        android:layout_below="@+id/text_max"
+        android:text="min"/>
+    
+
+</RelativeLayout>

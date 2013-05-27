@@ -28,8 +28,9 @@ public class MainActivity extends Activity {
 
 	private AsyncHttpClient client = new AsyncHttpClient();
 
-	private ArrayList<String> items = new ArrayList<String>();
-	private ArrayAdapter<String> aa;
+	private ArrayList<Weather> items = new ArrayList<Weather>();
+//	private ArrayAdapter<String> aa;
+	private WeatherAdapter aa;
 
 	public static final String MY_PREFERENCE = "com.utk.HelloWeather";
 	private SharedPreferences mySharedPreference;
@@ -44,8 +45,9 @@ public class MainActivity extends Activity {
 		listView = (ListView) findViewById(R.id.listView);
 		textSearch = (EditText) findViewById(R.id.text_search);
 
-		aa = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, items);
+//		aa = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_1, items);
+		aa = new WeatherAdapter(this, items, R.layout.weather_item);
 		listView.setAdapter(aa);
 
 		textSearch.setOnKeyListener(new OnKeyListener() {
@@ -92,10 +94,14 @@ public class MainActivity extends Activity {
 						String minC = jItem.getString("tempMinC");
 						String weatherDesc = jItem.getJSONArray("weatherDesc")
 								.getJSONObject(0).getString("value");
-						String weatherMsg = String.format(
-								"%s: %s - Max %s, Min %s", 
-								date, weatherDesc, maxC, minC);
-						items.add(weatherMsg);
+						String thumbnail = jItem.getJSONArray("weatherIconUrl")
+								.getJSONObject(0).getString("value");
+//						String weatherMsg = String.format(
+//								"%s: %s - Max %s, Min %s", 
+//								date, weatherDesc, maxC, minC);
+						Weather item = new Weather(date, maxC, minC, weatherDesc, thumbnail);
+						items.add(item);
+//						items.add(weatherMsg);
 					}
 					
 					aa.notifyDataSetChanged();

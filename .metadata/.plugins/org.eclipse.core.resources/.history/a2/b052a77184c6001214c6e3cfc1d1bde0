@@ -1,0 +1,10 @@
+package com.utk.helloweather;
+
+public class Weather {
+	private String date;
+	private String maxC;
+	private String minC;
+	private String descritpion;
+	private String thumbnail;
+	
+}

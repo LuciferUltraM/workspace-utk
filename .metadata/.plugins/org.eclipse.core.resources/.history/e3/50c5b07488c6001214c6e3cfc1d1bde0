@@ -1,0 +1,65 @@
+package com.utk.helloweather;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class WeatherAdapter extends BaseAdapter {
+
+	private Activity activity;
+	private ArrayList<Weather> data;
+	private int resId;
+	private static LayoutInflater mInflater = null;
+
+	public WeatherAdapter(Activity a, ArrayList<Weather> d, int resourceId) {
+		activity = a;
+		data = d;
+		resId = resourceId;
+		mInflater = (LayoutInflater) activity
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+
+	@Override
+	public int getCount() {
+		return data.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return position;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
+	
+	private static final class ViewHolder {
+		ImageView thumbnail;
+		TextView date;
+		TextView description;
+		TextView max;
+		TextView min;
+	}
+
+	@Override
+	public View getView(int posion, View convertView, ViewGroup parent) {
+		ViewHolder viewHolder;
+		if (convertView == null) {
+			convertView = mInflater.inflate(resId, parent, false);
+			holder = new ViewHolder();
+			
+		}
+		
+		
+		return null;
+	}
+
+}
