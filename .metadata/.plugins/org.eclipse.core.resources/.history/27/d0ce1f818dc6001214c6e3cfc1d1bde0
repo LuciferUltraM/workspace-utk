@@ -142,10 +142,8 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onDestroy() {
+		aa.stopImageLoader();
 		super.onDestroy();
-		if (aa != null) {
-			aa.stopImageLoader();	
-		}
 	}
 
 }

@@ -93,7 +93,7 @@ public class WeatherAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	public void stopImageLoader() {
+	public stopImageLoader() {
 		imageLoader.stop();
 	}
 }

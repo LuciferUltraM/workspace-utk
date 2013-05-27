@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,7 +20,7 @@ public class WeatherAdapter extends BaseAdapter {
 	private ArrayList<Weather> data;
 	private int resId;
 	private static LayoutInflater mInflater = null;
-
+	
 	private ImageLoader imageLoader = ImageLoader.getInstance();
 	private DisplayImageOptions defaultOptions;
 
@@ -31,11 +30,6 @@ public class WeatherAdapter extends BaseAdapter {
 		resId = resourceId;
 		mInflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		imageLoader.init(ImageLoaderConfiguration.createDefault(a
-				.getApplicationContext()));
-		defaultOptions = new DisplayImageOptions.Builder().cacheInMemory()
-				.cacheOnDisc().build();
 	}
 
 	@Override
@@ -72,28 +66,23 @@ public class WeatherAdapter extends BaseAdapter {
 			holder.date = (TextView) convertView.findViewById(R.id.text_date);
 			holder.description = (TextView) convertView
 					.findViewById(R.id.text_description);
-			holder.max = (TextView) convertView.findViewById(R.id.text_max);
-			holder.min = (TextView) convertView.findViewById(R.id.text_min);
-
+			holder.max = (TextView) convertView
+					.findViewById(R.id.text_max);
+			holder.min = (TextView) convertView
+					.findViewById(R.id.text_min);
+			
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
+		
 		Weather item = data.get(posion);
-
+		
 		holder.date.setText(item.getDate());
 		holder.description.setText(item.getDescritpion());
 		holder.max.setText("Max : " + item.getMaxC());
 		holder.min.setText("Min : " + item.getMinC());
-
-		imageLoader.displayImage(item.getThumbnail(), holder.thumbnail,
-				defaultOptions);
-
 		return convertView;
 	}
 
-	public void stopImageLoader() {
-		imageLoader.stop();
-	}
 }

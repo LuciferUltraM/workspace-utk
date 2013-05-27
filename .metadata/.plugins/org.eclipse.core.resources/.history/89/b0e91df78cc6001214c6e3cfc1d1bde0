@@ -34,8 +34,10 @@ public class WeatherAdapter extends BaseAdapter {
 
 		imageLoader.init(ImageLoaderConfiguration.createDefault(a
 				.getApplicationContext()));
-		defaultOptions = new DisplayImageOptions.Builder().cacheInMemory()
-				.cacheOnDisc().build();
+		defaultOptions = new DisplayImageOptions.Builder()
+		.cacheInMemory()
+		.cacheOnDisc()
+		.build();
 	}
 
 	@Override
@@ -86,14 +88,10 @@ public class WeatherAdapter extends BaseAdapter {
 		holder.description.setText(item.getDescritpion());
 		holder.max.setText("Max : " + item.getMaxC());
 		holder.min.setText("Min : " + item.getMinC());
-
-		imageLoader.displayImage(item.getThumbnail(), holder.thumbnail,
-				defaultOptions);
-
+		
+		imageLoader.displayImage(item.getThumbnail(), holder.thumbnail, defaultOptions);
+		
 		return convertView;
 	}
 
-	public void stopImageLoader() {
-		imageLoader.stop();
-	}
 }

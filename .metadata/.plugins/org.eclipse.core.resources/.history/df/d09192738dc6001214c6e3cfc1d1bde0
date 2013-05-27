@@ -139,13 +139,5 @@ public class MainActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (aa != null) {
-			aa.stopImageLoader();	
-		}
-	}
 
 }
