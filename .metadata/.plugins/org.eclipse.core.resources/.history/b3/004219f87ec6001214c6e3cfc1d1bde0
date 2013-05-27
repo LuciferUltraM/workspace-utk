@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show();
 			break;
 		case R.id.action_refresh:
-			refresh();
+			
 			break;
 		default:
 			break;

@@ -62,7 +62,9 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		refresh();
+		String city = mySharedPreference.getString("city", "bangkok");
+		showWeather(city);
+		textSearch.setText(city);
 	}
 
 	private void refresh() {
@@ -126,7 +128,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show();
 			break;
 		case R.id.action_refresh:
-			refresh();
+			
 			break;
 		default:
 			break;

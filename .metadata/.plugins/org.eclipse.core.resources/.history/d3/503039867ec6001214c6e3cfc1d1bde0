@@ -20,7 +20,6 @@ import android.view.View.OnKeyListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private ListView listView;
@@ -62,14 +61,11 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		refresh();
-	}
-
-	private void refresh() {
 		String city = mySharedPreference.getString("city", "bangkok");
 		showWeather(city);
 		textSearch.setText(city);
 	}
+
 	private void showWeather(String city) {
 		SharedPreferences.Editor editor = mySharedPreference.edit();
 		editor.putString("city", city);
@@ -123,11 +119,9 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_hello:
-			Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show();
+			
 			break;
-		case R.id.action_refresh:
-			refresh();
-			break;
+
 		default:
 			break;
 		}

@@ -62,13 +62,13 @@ public class MainActivity extends Activity {
 			}
 		});
 		
-		refresh();
-	}
-
-	private void refresh() {
 		String city = mySharedPreference.getString("city", "bangkok");
 		showWeather(city);
 		textSearch.setText(city);
+	}
+
+	private void refresh() {
+		
 	}
 	private void showWeather(String city) {
 		SharedPreferences.Editor editor = mySharedPreference.edit();
@@ -126,7 +126,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show();
 			break;
 		case R.id.action_refresh:
-			refresh();
+			
 			break;
 		default:
 			break;
